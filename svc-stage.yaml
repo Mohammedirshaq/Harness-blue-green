@@ -1,0 +1,11 @@
+# svc-stage.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service-stage
+spec:
+  selector:
+    version: green  # or blue, during staging
+  ports:
+  - port: 80
+    targetPort: 5000
