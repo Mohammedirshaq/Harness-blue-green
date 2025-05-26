@@ -1,1 +1,11 @@
-
+# svc-primary.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service-primary
+spec:
+  selector:
+    version: blue   # or green, updated by Harness
+  ports:
+  - port: 80
+    targetPort: 5000
