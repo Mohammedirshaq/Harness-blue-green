@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-apk-blue
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blue  # The label should match the one in the pod template
+
+  template:
+    metadata:
+      labels:
+        app: blue  # Adding the label here
+    spec:
+      containers:
+        - name: flask-apk
+          image: mdirshaq/flask-web-app:v1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
