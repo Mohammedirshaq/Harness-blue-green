@@ -1,21 +1,22 @@
+# deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-apk-blue
+  name: flask-app-${infra.kubernetes.release.name}
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: blue  # The label should match the one in the pod template
-
+      app: flask
+      version: ${serviceVariable.version}  # Set by Harness
   template:
     metadata:
       labels:
-        app: blue  # Adding the label here
+        app: flask
+        version: ${serviceVariable.version}
     spec:
       containers:
-        - name: flask-apk
-          image: mdirshaq/flask-web-app:v1
-          imagePullPolicy: Always
-          ports:
-            - containerPort: 5000
+      - name: flask-app
+        image: mdirshaq/flask-web-app:${serviceVariable.tag}
+        ports:
+        - containerPort: 5000
